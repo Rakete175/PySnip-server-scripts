@@ -67,7 +67,7 @@ add(tpts)
 add(tpc)
 
 def ff(player):
-    if player.alive!={}:
+    if player.alive=={}:
         player.unfallable = False
 
 def set_pos(player, goal, pos):
