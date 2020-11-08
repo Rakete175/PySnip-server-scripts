@@ -80,8 +80,7 @@ def set_pos(player, goal, pos):
     vectory=(goal[1]-pos[1])/blockdistance
     vectorz=(goal[2]-pos[2])/blockdistance #noclipping during flight is intended
     for i in range(1,blockdistance):
-        zzz=reactor.callLater(player.protocol.speed*(i), player.give_pos, (pos[0]+vectorx*i, pos[1]+vectory*i,pos[2]+vectorz*i), teleporttime, i)
-        player.allhisplannedstuff[teleporttime*i]=zzz
+        player.allhisplannedstuff[teleporttime*i]=reactor.callLater(player.protocol.speed*(i), player.give_pos, (pos[0]+vectorx*i, pos[1]+vectory*i,pos[2]+vectorz*i), teleporttime, i)
 
     
     
@@ -125,7 +124,6 @@ def apply_script(protocol, connection, config):
                     if (position[0]>=0) and (position[0]<=511) and (position[1] >=0) and (position[1]<=511) and (position[2]>-5) and (position[2]<=63):
                         player.set_location(position)
                         player.allhisplannedstuff.pop(teleporttime*iterator)
-                        self.unfallable=True #idk why I even need that but it made fall kills during/after a teleport more unlikely somehow
                 except:
                     pass
                         
